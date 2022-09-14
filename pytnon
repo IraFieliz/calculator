@@ -1,0 +1,28 @@
+#ця програма, щоб дізнатися ціну біткоїну на закриття і дізнатися скільки можна купити біткоїнів на $, які є у користувача на Python
+from bs4 import BeautifulSoup
+import requests
+
+#не треба платити за API  в Google Фінанси
+url = 'https://www.google.com/finance/quote/BTC-USD'
+HTML = requests.get(url)
+soup = BeautifulSoup(HTML.text, 'html.parser')
+print(soup.prettify())
+#<div class="EY8ABd-OWXEXe-TAWMXe" id="i12" role="tooltip" aria-hidden="true">
+def get_crypto_price(coin):
+    url = 'https://www.google.com/finance/quote/BTC-USD'
+    HTML = requests.get(url)
+    soup = BeautifulSoup(HTML.text, 'html.parser')
+    text = soup.find('div', attrs={'class':'EY8ABd-OWXEXe-TAWMXe'}).find('div', attrs={'class':'EY8ABd-OWXEXe-TAWMXe'}).text
+    # возврощаем текс
+    return text
+    #хочу получіти цену кріптовалюти
+
+    price = get_crypto_price('bitcoin')
+# печатаемо прайс
+    print("CLOSING RATE BITCOIN" + float(price))
+def main():
+  wallet_dollar = input('How much $ do you have?')
+  #шоб дізнатися скількі $ треба поделити $ на біткоін
+  wallet_bitcoin = wallet_dollar / wallet_bitcoin
+  #відповідь
+  print("You can buy" + wallet_bitcoin +  "BTC")
